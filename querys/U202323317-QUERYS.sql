@@ -6,7 +6,7 @@
 --			- Propietario
 --			- Lugar de nacimiento
 --			- Sexo
--- de los perros que no llegaron a ganar.
+-- de los perros que no llegaron a ganar ningun concurso.
 -- ===============================================
 USE ConcursoCanino;
 
