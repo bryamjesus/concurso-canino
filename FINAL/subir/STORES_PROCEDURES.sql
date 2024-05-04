@@ -90,10 +90,10 @@ BEGIN
 		SET @CODIGO_PARTICIPACION_CONCURSO = SCOPE_IDENTITY();
 
 		SELECT 
-			@CODIGO_PARTICIPACION_CONCURSO AS 'codigoParticipacion',
-			@NOMBRE_EJEMPLAR AS 'nombreEjemplar',
-			@NOMBRE_PROPIETARIO AS 'nombrePropietario',
-			@NOMBRE_MANEJADOR AS 'nombreManejador',
+			@CODIGO_PARTICIPACION_CONCURSO 		AS 'codigoParticipacion',
+			@NOMBRE_EJEMPLAR 									AS 'nombreEjemplar',
+			@NOMBRE_PROPIETARIO 							AS 'nombrePropietario',
+			@NOMBRE_MANEJADOR 								AS 'nombreManejador',
 			inscon.nombreConcurso,
 			inscon.nombreCategoria,
 			inscon.tarifaInscripcion,
