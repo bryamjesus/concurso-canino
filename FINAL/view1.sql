@@ -11,12 +11,12 @@ GO
 CREATE VIEW [dbo].[vw_Inscripcion_Concurso]
 AS
 SELECT
-	con.CoConcurso AS 'codigoConcurso',
-	con.NoConcurso AS 'nombreConcurso',
-	cat.CoCategoria AS 'codigoCategoria',
-	cat.NoCategoria AS 'nombreCategoria',
-	con.FeRealizacion AS 'fechaRealizacion',
-	concate.SsTarifaInscripcionCategoria AS 'tarifaInscripcion'
+	con.CoConcurso 													AS 'codigoConcurso',
+	con.NoConcurso 													AS 'nombreConcurso',
+	cat.CoCategoria 												AS 'codigoCategoria',
+	cat.NoCategoria 												AS 'nombreCategoria',
+	con.FeRealizacion 											AS 'fechaRealizacion',
+	concate.SsTarifaInscripcionCategoria 		AS 'tarifaInscripcion'
 FROM 
 	Concurso con
 JOIN Concurso_Categoria concate
@@ -24,5 +24,4 @@ JOIN Concurso_Categoria concate
 JOIN Categoria cat
 	ON cat.CoCategoria = concate.CoCategoria
 GO
-
 
