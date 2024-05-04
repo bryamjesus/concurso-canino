@@ -11,7 +11,7 @@ GO
 -- =============================================
 -- Author:		    Bryam Jesus Talledo Garcia
 -- Create date:   2024-05-04
--- Description:   Registro de un participante
+-- Description:	  Registro de un participante
 -- =============================================
 CREATE PROCEDURE [dbo].[sp_registro_can_concurso]
 	@NOMBRE_EJEMPLAR VARCHAR(50),
