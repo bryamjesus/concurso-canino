@@ -86,5 +86,5 @@ BEGIN
 END
 GO
 
-ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Insert_Particiacion]
+ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Ejemplar_Participante]
 GO

@@ -15,7 +15,7 @@ GO
 -- Description: Validar que la fecha de registro no sea mayor a la fecha en
 --              en la que se realizara el concurso
 -- =============================================
-CREATE TRIGGER [dbo].[Tr_Insert_Particiacion]
+CREATE TRIGGER [dbo].[Tr_Fecha]
 	ON [dbo].[ParticipacionConcurso]
   AFTER INSERT, UPDATE
 AS 
@@ -44,5 +44,5 @@ BEGIN
 		ROLLBACK TRANSACTION;  
 	END
 END
-ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Insert_Particiacion]
+ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Fecha]
 GO
