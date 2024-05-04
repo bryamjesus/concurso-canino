@@ -43,7 +43,7 @@ BEGIN
 		END
 
 		PRINT 'ANTES '
-		 DECLARE @EDAD_MINIMA int, @EDAD_MAXIMA int, @CODIGO_CATEGORIA int, @CODIGO_CATEGORIA_CAN INT;
+		DECLARE @EDAD_MINIMA int, @EDAD_MAXIMA int, @CODIGO_CATEGORIA int, @CODIGO_CATEGORIA_CAN INT;
 		-- VALIDACION DE EDAD
 		DECLARE rando_edad_cursor CURSOR FOR
 		SELECT 
@@ -87,11 +87,14 @@ BEGIN
 			@NOMBRE_EJEMPLAR AS 'nombreEjemplar',
 			@NOMBRE_PROPIETARIO AS 'nombrePropietario',
 			@NOMBRE_MANEJADOR AS 'nombreManejador',
-			cc.SsTarifaInscripcionCategoria AS 'tarifaInscripcion'
-		FROM Concurso_Categoria cc
+			inscon.nombreConcurso,
+			inscon.nombreCategoria,
+			inscon.tarifaInscripcion,
+			inscon.fechaRealizacion
+		FROM vw_Inscripcion_Concurso inscon
 		WHERE
-			cc.CoCategoria = @CODIGO_CATEGORIA_CAN
-			AND cc.CoConcurso = @CODIGO_CONCURSO;
+			inscon.codigoCategoria = @CODIGO_CATEGORIA_CAN
+			AND inscon.codigoConcurso = @CODIGO_CONCURSO;
 	END TRY
 	BEGIN CATCH
 		SELECT 

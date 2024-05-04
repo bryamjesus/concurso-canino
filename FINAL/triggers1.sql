@@ -1,6 +1,6 @@
 USE [ConcursoCanino]
 GO
-/****** Object:  Trigger [dbo].[Tr_Insert_Particiacion]    Script Date: 4/05/2024 03:07:18 ******/
+/****** Object:  Trigger [dbo].[Tr_Insert_Particiacion]    Script Date: 4/05/2024 04:39:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,5 +76,17 @@ BEGIN
 		ROLLBACK TRANSACTION;  
 	END
 
-	--SELECT *, @RAZA_EJEMPLAR,@EDAD_EJEMPLAR FROM inserted;
+	DECLARE @FECHA_REALIZACION DATE;
+	SELECT
+		@FECHA_REALIZACION = c.FeRealizacion
+	FROM
+		Concurso c
+	WHERE
+		c.CoConcurso = @COD_CONCURSO_INSERTED;
+
+	IF (@FECHA_REALIZACION < GETDATE())
+	BEGIN
+		RAISERROR ('El concurso ya se realizó', 16, 1);  
+		ROLLBACK TRANSACTION;  
+	END
 END
