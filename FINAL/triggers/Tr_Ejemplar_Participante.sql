@@ -14,37 +14,25 @@ GO
 -- Create date: 2024-05-03
 -- Description: Registro de [ParticipacionConcurso]
 -- =============================================
-CREATE TRIGGER [dbo].[Tr_Insert_Particiacion]
+CREATE TRIGGER [dbo].[Tr_Ejemplar_Participante]
 	ON [dbo].[ParticipacionConcurso]
   AFTER INSERT, UPDATE
 AS 
 BEGIN
-	SET NOCOUNT ON;
+  SET NOCOUNT ON;
 	DECLARE 
 		@COD_CONCURSO_INSERTED INT,
 		@COD_EJEMPLAR_INSERTED INT,
-		@COD_CATEGORIA_INSERTED INT,
-		@PUESTO_INSERTED INT,
-		@CALIFICACION_INSERTED VARCHAR(20);
+		@COD_CATEGORIA_INSERTED INT;
 		
-
-	-- Obteniendo los datos que estamos insertando === --
+  -- Obteniendo los datos que estamos insertando === --
 	SELECT 
 		@COD_CONCURSO_INSERTED = i.CoConcurso,
 		@COD_EJEMPLAR_INSERTED = i.CoEjemplar,
-		@COD_CATEGORIA_INSERTED = i.CoCategoria,
-		@PUESTO_INSERTED = i.NuPuesto,
-		@CALIFICACION_INSERTED = i.TxCalificacion
+		@COD_CATEGORIA_INSERTED = i.CoCategoria
 	FROM inserted i;
 
-	-- === Validar que no se este registrando el campo PUESTO ni Calificacion, solo eso es para cuando de Update === --
-	IF ((NOT EXISTS (SELECT * FROM DELETED)) AND (@PUESTO_INSERTED IS NOT NULL OR @CALIFICACION_INSERTED IS NOT NULL))
-	BEGIN
-		RAISERROR ('NO PUEDE REGISTRAR PUESTO NI CALIFICACION CUANDO REGISTRA UN PARTICIPANTE', 16, 1);  
-		ROLLBACK TRANSACTION;
-	END
-	
-	-- === Obteniendo el valores del ejemplar === --
+  -- === Obteniendo el valores del ejemplar === --
 	DECLARE
 		@RAZA_EJEMPLAR INT,
 		@EDAD_EJEMPLAR INT;
@@ -56,8 +44,8 @@ BEGIN
 		Ejemplar e 
 	WHERE
 		e.CoEjemplar = @COD_EJEMPLAR_INSERTED;
-	
-	-- === Validando que el ejemplar exista === --
+
+  -- === Validando que el ejemplar exista === --
 	IF @RAZA_EJEMPLAR = 0 OR @RAZA_EJEMPLAR IS NULL OR @RAZA_EJEMPLAR = '' -- <>
 	BEGIN
 		RAISERROR ('ERROR LA RAZA DEL EJEMPLAR NO EXISTE', 16, 1);  
@@ -73,8 +61,8 @@ BEGIN
 	WHERE
 		rc.CoConcurso = @COD_CONCURSO_INSERTED
 		AND rc.CoRaza = @RAZA_EJEMPLAR
-
-	IF @EXISTE_RAZA_CONCURSO = 0
+  
+  IF @EXISTE_RAZA_CONCURSO = 0
 	BEGIN
 		RAISERROR ('RAZA DEL PERRO NO ESTA PERMITIDO EN ESTE CONCURSO', 16, 1);  
 		ROLLBACK TRANSACTION;  
@@ -95,25 +83,8 @@ BEGIN
 		RAISERROR ('LA EDAD DEL PERRO NO ESTA PERMITIDO PARA ESTA CATEGORIA DEL CONCURSO',16, 1);  
 		ROLLBACK TRANSACTION;  
 	END
-
-	-- === Validar la fecha de realizacion === --
-	DECLARE @FECHA_REALIZACION DATE;
-	SELECT
-		@FECHA_REALIZACION = c.FeRealizacion
-	FROM
-		Concurso c
-	WHERE
-		c.CoConcurso = @COD_CONCURSO_INSERTED;
-
-	IF (@FECHA_REALIZACION < GETDATE())
-	BEGIN
-		RAISERROR ('EL CONCURSO YA SE REALIZÓ', 16, 1);  
-		ROLLBACK TRANSACTION;  
-	END
 END
 GO
 
 ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Insert_Particiacion]
 GO
-
-
