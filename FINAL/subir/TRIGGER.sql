@@ -11,7 +11,9 @@ GO
 -- =============================================
 -- Author:		Bryam Talledo
 -- Create date: 2024-05-03
--- Description: Registro de [ParticipacionConcurso]
+-- Description: Registro de [ParticipacionConcurso] 
+
+-- TODO: QUE NO PERMITA INGRESAR PUESTO
 -- =============================================
 CREATE TRIGGER [dbo].[Tr_Insert_Particiacion]
 	ON [dbo].[ParticipacionConcurso]
