@@ -1,7 +1,7 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  Trigger [dbo].[Tr_Insert_Particiacion]    Script Date: 4/05/2024 15:57:59 ******/
+/****** Object:  Trigger [dbo].[Tr_Ejemplar_Participante]    Script Date: 4/05/2024 16:53:02 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,20 +19,20 @@ CREATE TRIGGER [dbo].[Tr_Ejemplar_Participante]
   AFTER INSERT, UPDATE
 AS 
 BEGIN
-  SET NOCOUNT ON;
+	SET NOCOUNT ON;
 	DECLARE 
 		@COD_CONCURSO_INSERTED INT,
 		@COD_EJEMPLAR_INSERTED INT,
 		@COD_CATEGORIA_INSERTED INT;
 		
-  -- Obteniendo los datos que estamos insertando === --
+	-- Obteniendo los datos que estamos insertando === --
 	SELECT 
 		@COD_CONCURSO_INSERTED = i.CoConcurso,
 		@COD_EJEMPLAR_INSERTED = i.CoEjemplar,
 		@COD_CATEGORIA_INSERTED = i.CoCategoria
 	FROM inserted i;
 
-  -- === Obteniendo el valores del ejemplar === --
+	-- === Obteniendo el valores del ejemplar === --
 	DECLARE
 		@RAZA_EJEMPLAR INT,
 		@EDAD_EJEMPLAR INT;
@@ -45,7 +45,7 @@ BEGIN
 	WHERE
 		e.CoEjemplar = @COD_EJEMPLAR_INSERTED;
 
-  -- === Validando que el ejemplar exista === --
+	-- === Validando que el ejemplar exista === --
 	IF @RAZA_EJEMPLAR = 0 OR @RAZA_EJEMPLAR IS NULL OR @RAZA_EJEMPLAR = '' -- <>
 	BEGIN
 		RAISERROR ('ERROR LA RAZA DEL EJEMPLAR NO EXISTE', 16, 1);  
@@ -62,9 +62,9 @@ BEGIN
 		rc.CoConcurso = @COD_CONCURSO_INSERTED
 		AND rc.CoRaza = @RAZA_EJEMPLAR
   
-  IF @EXISTE_RAZA_CONCURSO = 0
+	IF @EXISTE_RAZA_CONCURSO = 0
 	BEGIN
-		RAISERROR ('RAZA DEL PERRO NO ESTA PERMITIDO EN ESTE CONCURSO', 16, 1);  
+		RAISERROR ('LA RAZA DEL PERRO NO ESTA PERMITIDO EN ESTE CONCURSO', 16, 1);  
 		ROLLBACK TRANSACTION;  
 	END
 
