@@ -1,19 +1,18 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  Trigger [dbo].[Tr_Insert_Particiacion]    Script Date: 4/05/2024 12:14:38 ******/
+/****** Object:  Trigger [dbo].[Tr_Insert_Particiacion]    Script Date: 4/05/2024 15:57:59 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 -- =============================================
 -- Author:		Bryam Talledo
 -- Create date: 2024-05-03
--- Description: Registro de [ParticipacionConcurso] 
-
--- TODO: QUE NO PERMITA INGRESAR PUESTO
+-- Description: Registro de [ParticipacionConcurso]
 -- =============================================
 CREATE TRIGGER [dbo].[Tr_Insert_Particiacion]
 	ON [dbo].[ParticipacionConcurso]
@@ -22,21 +21,34 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	DECLARE 
-		@COD_CONCURSO_INSERTED int,
-		@COD_EJEMPLAR_INSERTED int,
-		@COD_CATEGORIA_INSERTED int,
-		@RAZA_EJEMPLAR int,
-		@EDAD_EJEMPLAR int,
-		@RANGO_EDAD int;
+		@COD_CONCURSO_INSERTED INT,
+		@COD_EJEMPLAR_INSERTED INT,
+		@COD_CATEGORIA_INSERTED INT,
+		@PUESTO_INSERTED INT,
+		@CALIFICACION_INSERTED VARCHAR(20);
+		
 
 	-- Obteniendo los datos que estamos insertando === --
 	SELECT 
 		@COD_CONCURSO_INSERTED = i.CoConcurso,
 		@COD_EJEMPLAR_INSERTED = i.CoEjemplar,
-		@COD_CATEGORIA_INSERTED = i.CoCategoria
+		@COD_CATEGORIA_INSERTED = i.CoCategoria,
+		@PUESTO_INSERTED = i.NuPuesto,
+		@CALIFICACION_INSERTED = i.TxCalificacion
 	FROM inserted i;
 
+	-- === Validar que no se este registrando el campo PUESTO ni Calificacion, solo eso es para cuando de Update === --
+	IF ((NOT EXISTS (SELECT * FROM DELETED)) AND (@PUESTO_INSERTED IS NOT NULL OR @CALIFICACION_INSERTED IS NOT NULL))
+	BEGIN
+		RAISERROR ('NO PUEDE REGISTRAR PUESTO NI CALIFICACION CUANDO REGISTRA UN PARTICIPANTE', 16, 1);  
+		ROLLBACK TRANSACTION;
+	END
+	
 	-- === Obteniendo el valores del ejemplar === --
+	DECLARE
+		@RAZA_EJEMPLAR INT,
+		@EDAD_EJEMPLAR INT;
+
 	SELECT 
 		@RAZA_EJEMPLAR = e.CoRaza,
 		@EDAD_EJEMPLAR = e.NuEdadEjemplar
@@ -95,7 +107,7 @@ BEGIN
 
 	IF (@FECHA_REALIZACION < GETDATE())
 	BEGIN
-		RAISERROR ('El concurso ya se realizó', 16, 1);  
+		RAISERROR ('EL CONCURSO YA SE REALIZÓ', 16, 1);  
 		ROLLBACK TRANSACTION;  
 	END
 END
@@ -103,3 +115,5 @@ GO
 
 ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Insert_Particiacion]
 GO
+
+
