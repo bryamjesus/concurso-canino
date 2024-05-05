@@ -9,6 +9,12 @@ Para llevar un adecuado control de sus operaciones, se requiere diseñar una bas
     - Que me traiga ya los puestos y el texto calificación
   ### SP
     - que me de la lista de participantes y haya una columna que muestre cuantas veces a ganado
+    - QUE ME PUEDA OBTENER LAS GANACIAS 
+      - de un concurso solo
+      - de un rango de fechas 
+      - un store procedure que me saque el reporte de inscripciones a unos concursos, que puede de un concurso en especificio, de un rango de fechas o de todos los concursos
+
   ### Trigger
     - que valide que en el mismo concurso y categoria no haya uno con el mismo puesto
       - que no haya numero de puesto mas que concursantes
+    - 
