@@ -12,9 +12,12 @@ GO
 -- =============================================
 -- Author:		Bryam Talledo
 -- Create date: 2024-05-03
--- Description: Registro de [ParticipacionConcurso]
+-- Description: Trigger que valida por el lado todo los datos referente al ejemplar
+--							- Si esta registrado.
+--							- Que puede la raza del ejemplar este permitida para el concurso.
+--							- Al igual que su edad si pertenece a la categoria de concurso.
 -- =============================================
-CREATE TRIGGER [dbo].[Tr_Ejemplar_Participante]
+CREATE TRIGGER [dbo].[TR_Validar_Datos_Ejemplar]
 	ON [dbo].[ParticipacionConcurso]
   AFTER INSERT, UPDATE
 AS 

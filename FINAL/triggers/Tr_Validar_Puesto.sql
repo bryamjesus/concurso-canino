@@ -11,11 +11,11 @@ GO
 -- =============================================
 -- Author:		  Bryam Jesus Talledo Garcia
 -- Create date: 2024-05-04
--- Description:	Validar cuando se este ingrasando el puesto que no sea mayor al numero de participantes
---              que no sea mayor al numero de participantes
+-- Description:	Validar cuando se esté ingresando el puesto que no sea mayor al número de participantes
+--              que no sea mayor al número de participantes
 --              y que no vaya a utilizar un puesto que ya tiene otro concursante
 -- =============================================
-CREATE TRIGGER [dbo].[Tr_Validar_Puesto]
+CREATE TRIGGER [dbo].[TR_Validar_Puesto]
   ON [dbo].[ParticipacionConcurso]
   AFTER UPDATE, INSERT
 AS 

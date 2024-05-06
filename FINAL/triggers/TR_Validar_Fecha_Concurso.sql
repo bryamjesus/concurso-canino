@@ -15,7 +15,7 @@ GO
 -- Description: Validar que la fecha de registro no sea mayor a la fecha en
 --              en la que se realizara el concurso
 -- =============================================
-CREATE TRIGGER [dbo].[Tr_Fecha]
+CREATE TRIGGER [dbo].[TR_Validar_Fecha_Concurso]
 	ON [dbo].[ParticipacionConcurso]
 	AFTER INSERT, UPDATE
 AS 

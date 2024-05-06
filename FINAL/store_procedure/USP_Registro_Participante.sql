@@ -14,7 +14,7 @@ GO
 -- Create date:   2024-05-04
 -- Description:	  Registro de un participante
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_registro_can_concurso]
+CREATE PROCEDURE [dbo].[USP_Registro_Participante]
 	@NOMBRE_EJEMPLAR 			VARCHAR(50),
 	@NOMBRE_PROPIETARIO 	VARCHAR(50),
 	@CODIGO_MICROSHIP 		CHAR(10),
@@ -99,7 +99,7 @@ BEGIN
 			inscon.nombreCategoria,
 			inscon.tarifaInscripcion,
 			inscon.fechaRealizacion
-		FROM vw_Inscripcion_Concurso inscon
+		FROM VW_Concurso_Detalle inscon
 		WHERE
 			inscon.codigoCategoria = @CODIGO_CATEGORIA_CAN
 			AND inscon.codigoConcurso = @CODIGO_CONCURSO;
