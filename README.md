@@ -17,4 +17,4 @@ Para llevar un adecuado control de sus operaciones, se requiere diseñar una bas
   ### Trigger
     - que valide que en el mismo concurso y categoria no haya uno con el mismo puesto
       - que no haya numero de puesto mas que concursantes
-    - 
+    -  solo hay dos comisarios por concurso

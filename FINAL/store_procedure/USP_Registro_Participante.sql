@@ -1,13 +1,12 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_registro_can_concurso]    Script Date: 5/05/2024 01:33:19 ******/
+/****** Object:  StoredProcedure [dbo].[USP_Registro_Participante]    Script Date: 6/05/2024 01:35:17 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 -- =============================================
 -- Author:		    Bryam Jesus Talledo Garcia

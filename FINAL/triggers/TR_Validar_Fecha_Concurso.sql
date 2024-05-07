@@ -1,13 +1,12 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  Trigger [dbo].[Tr_Fecha]    Script Date: 4/05/2024 16:58:52 ******/
+/****** Object:  Trigger [dbo].[TR_Validar_Fecha_Concurso]    Script Date: 6/05/2024 01:36:43 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 -- =============================================
 -- Author:		  Bryam Talledo
@@ -38,5 +37,9 @@ BEGIN
 		ROLLBACK TRANSACTION;  
 	END
 END
-ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Fecha]
 GO
+
+ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [TR_Validar_Fecha_Concurso]
+GO
+
+

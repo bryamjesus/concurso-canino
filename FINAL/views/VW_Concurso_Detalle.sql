@@ -1,7 +1,7 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  View [dbo].[vw_Inscripcion_Concurso]    Script Date: 5/05/2024 01:35:29 ******/
+/****** Object:  View [dbo].[VW_Concurso_Detalle]    Script Date: 6/05/2024 01:34:44 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -24,5 +24,3 @@ JOIN Concurso_Categoria concate
 JOIN Categoria cat
 	ON cat.CoCategoria = concate.CoCategoria
 GO
-
-

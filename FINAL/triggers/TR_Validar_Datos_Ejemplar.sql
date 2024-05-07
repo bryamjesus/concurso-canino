@@ -1,13 +1,12 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  Trigger [dbo].[Tr_Ejemplar_Participante]    Script Date: 4/05/2024 16:53:02 ******/
+/****** Object:  Trigger [dbo].[TR_Validar_Datos_Ejemplar]    Script Date: 6/05/2024 01:36:24 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 -- =============================================
 -- Author:		Bryam Talledo
@@ -89,5 +88,7 @@ BEGIN
 END
 GO
 
-ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Ejemplar_Participante]
+ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [TR_Validar_Datos_Ejemplar]
 GO
+
+

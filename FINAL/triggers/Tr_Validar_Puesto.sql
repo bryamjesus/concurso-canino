@@ -1,7 +1,7 @@
 USE [ConcursoCanino]
 GO
 
-/****** Object:  Trigger [dbo].[Tr_Validar_Puesto]    Script Date: 4/05/2024 16:12:59 ******/
+/****** Object:  Trigger [dbo].[TR_Validar_Puesto]    Script Date: 6/05/2024 01:36:58 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -83,7 +83,7 @@ BEGIN
 END
 GO
 
-ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [Tr_Validar_Puesto]
+ALTER TABLE [dbo].[ParticipacionConcurso] ENABLE TRIGGER [TR_Validar_Puesto]
 GO
 
 
